@@ -39,8 +39,10 @@ class _GoogleMapViewState extends State<GoogleMapView> {
             //ده بيبقي ثابت مش بيتغير و بيشتغل اول ما افتح ماب
             initialCameraPosition: initialCameraPosition,
             //لو محتاجه اعمل ابديت ع ماب
-            onMapCreated: (  GoogleMapController controller){
+            onMapCreated: (  GoogleMapController controller)async{
               googleMapController=controller;
+              initialMapStyle();
+
             },
             //بتحدد النطاق الي عاوزه اعرضه في ماب بس
             // cameraTargetBounds: CameraTargetBounds(LatLngBounds(
@@ -64,5 +66,9 @@ class _GoogleMapViewState extends State<GoogleMapView> {
         ],
       ),
     );
+  }
+  void initialMapStyle()async{
+    String style = await DefaultAssetBundle.of(context).loadString('assets/map_style/map_style.json');
+    googleMapController.setMapStyle(style);
   }
 }
