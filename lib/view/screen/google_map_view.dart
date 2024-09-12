@@ -35,6 +35,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
       body: Stack(
         children: [
           GoogleMap(
+            zoomControlsEnabled: false,
             //ده بيبقي ثابت مش بيتغير و بيشتغل اول ما افتح ماب
             initialCameraPosition: initialCameraPosition,
             //لو محتاجه اعمل ابديت ع ماب
