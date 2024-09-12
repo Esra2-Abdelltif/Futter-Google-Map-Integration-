@@ -17,7 +17,12 @@ class _GoogleMapViewState extends State<GoogleMapView> {
     initialCameraPosition= const CameraPosition(
         //required
         target: LatLng(29.955404, 32.476655),
-        );
+        //World View 0 -> 3
+        //Country View 4 -> 6
+        //City View 10 -> 12
+        //Street View 13 -> 17
+        //Building View 18 -> 20
+        zoom: 18);
     super.initState();
   }
 
