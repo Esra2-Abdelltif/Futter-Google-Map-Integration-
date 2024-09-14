@@ -16,7 +16,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
   Set<Marker> markers = {};
   Set<Polyline> polyLines = {};
   Set<Polygon> polygons = {};
-
+  Set<Circle> circles={};
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(
@@ -26,7 +26,9 @@ class _GoogleMapViewState extends State<GoogleMapView> {
     );
     initialMarker();
     drawPolyline();
-    initPolygon();
+    drawCircles();
+
+    drawPolygon();
     super.initState();
   }
 
@@ -51,6 +53,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
             markers: markers,
             polylines: polyLines,
             polygons: polygons,
+            circles: circles,
           ),
           Positioned(
               bottom: 16,
@@ -104,7 +107,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
     polyLines.add(polyline);
   }
 
-  void initPolygon() {
+  void drawPolygon() {
     Polygon polygon = Polygon(
         polygonId: const PolygonId('test'),
         points: const [
@@ -126,4 +129,16 @@ class _GoogleMapViewState extends State<GoogleMapView> {
         strokeColor: Colors.green);
     polygons.add(polygon);
   }
+  void drawCircles() {
+    Circle circle =  Circle(
+        circleId:const CircleId('1'),
+        center: const LatLng(29.955404, 32.476655),
+        radius: 500,
+        strokeWidth: 1,
+        fillColor:Colors.blue.withOpacity(0.3),
+        strokeColor: Colors.blue
+    );
+    circles.add(circle);
+  }
+
 }
