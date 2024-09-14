@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_map_intergration/utils/Services/polyline_services.dart';
 import 'package:google_map_intergration/utils/constants/app_image.dart';
 import 'package:google_map_intergration/utils/function/get_image_from_raw_data.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,7 +14,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
   late CameraPosition initialCameraPosition;
   late GoogleMapController googleMapController;
   Set<Marker> markers = {};
-  @override
+  Set<Polyline> polyLines = {};
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(
@@ -22,7 +23,8 @@ class _GoogleMapViewState extends State<GoogleMapView> {
       zoom: 16,
 
     );
-    setMarker();
+    initialMarker();
+    drawPolyline();
     super.initState();
   }
 
@@ -46,6 +48,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
             //     southwest: const LatLng(29.936142, 32.476483),
             //     northeast:const LatLng(29.970306, 32.522784))),
             markers: markers,
+            polylines: polyLines,
 
           ),
           Positioned(
@@ -71,7 +74,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
   }
 
 
-  void setMarker() async{
+  void initialMarker() async{
     var customMarkerIcon=   BitmapDescriptor.fromBytes(await getImageFromRawData(image:AppImagePaths.locationIconImage,width: 100));
     Marker newMarker = Marker(
       markerId: MarkerId(const LatLng(29.955404, 32.476655).toString()),
@@ -86,4 +89,22 @@ class _GoogleMapViewState extends State<GoogleMapView> {
 
     });
   }
+
+ void drawPolyline( )  {
+    Polyline polyline =   const Polyline(
+      width: 5,
+      zIndex: 2,
+      patterns: [PatternItem.dot],
+      color: Colors.red,
+      startCap: Cap.roundCap,
+      polylineId: PolylineId('1'),
+      points: [
+        LatLng(29.955404, 32.476655),
+        LatLng(29.936142, 32.476483)
+      ]
+    );
+    polyLines.add(polyline);
+
+  }
+
 }
