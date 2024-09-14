@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_map_intergration/utils/constants/app_image.dart';
+import 'package:google_map_intergration/utils/function/get_image_from_raw_data.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import 'dart:ui' as ui;
 class GoogleMapView extends StatefulWidget {
   const GoogleMapView({super.key});
 
@@ -73,8 +75,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
 
 
   void setMarker() async{
-    var customMarkerIcon= await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(size: Size(10, 10)), AppImagePaths.locationIconImage);
+    var customMarkerIcon=   BitmapDescriptor.fromBytes(await getImageFromRawData(image:AppImagePaths.locationIconImage,width: 100));
     Marker newMarker = Marker(
       markerId: MarkerId(const LatLng(29.955404, 32.476655).toString()),
       icon: customMarkerIcon,
