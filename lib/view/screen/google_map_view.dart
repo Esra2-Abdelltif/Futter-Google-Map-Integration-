@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_map_intergration/utils/constants/app_image.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -70,15 +71,21 @@ class _GoogleMapViewState extends State<GoogleMapView> {
     googleMapController.setMapStyle(style);
   }
 
-  void setMarker() {
+
+  void setMarker() async{
+    var customMarkerIcon= await BitmapDescriptor.fromAssetImage(
+        const ImageConfiguration(size: Size(10, 10)), AppImagePaths.locationIconImage);
     Marker newMarker = Marker(
       markerId: MarkerId(const LatLng(29.955404, 32.476655).toString()),
-      icon: BitmapDescriptor.defaultMarker,
+      icon: customMarkerIcon,
       position: const LatLng(29.955404, 32.476655),
       infoWindow: const InfoWindow(
           title: "Home",
           snippet: "${29.955404}, ${32.476655}"),
     );
     markers.add(newMarker);
+    setState(() {
+
+    });
   }
 }
