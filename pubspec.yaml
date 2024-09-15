@@ -20,6 +20,8 @@ dependencies:
   google_maps_flutter: ^2.9.0
   #Polylines & Shortest Distance
   flutter_polyline_points: ^1.0.0
+  #get device location
+  location: ^7.0.0
 
 dev_dependencies:
   flutter_test:
